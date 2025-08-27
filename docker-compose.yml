@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # Frontend React Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+    networks:
+      - mangaba-network
+
+  # Backend API (if needed)
+  backend:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    command: sh -c "npm install && npm start"
+    networks:
+      - mangaba-network
+
+  # Ollama LLM Service
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - mangaba-network
+    restart: unless-stopped
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - mangaba-network
+    restart: unless-stopped
+
+volumes:
+  ollama-data:
+  redis-data:
+
+networks:
+  mangaba-network:
+    driver: bridge

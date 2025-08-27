@@ -1,0 +1,221 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run ESLint
+      run: npx eslint src/ --ext .js,.jsx --format=json --output-file=eslint-report.json || true
+    
+    - name: Annotate ESLint results
+      uses: ataylorme/eslint-annotate-action@v2
+      if: always()
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        report-json: "eslint-report.json"
+    
+    - name: Run Prettier check
+      run: npx prettier --check "src/**/*.{js,jsx,json,css,md}"
+
+  type-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run type checking (if TypeScript)
+      run: |
+        if [ -f "tsconfig.json" ]; then
+          npx tsc --noEmit
+        else
+          echo "No TypeScript configuration found, skipping type check"
+        fi
+
+  complexity:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install complexity analysis tools
+      run: npm install -g complexity-report jshint
+    
+    - name: Run complexity analysis
+      run: |
+        echo "## Complexity Report" > complexity-report.md
+        echo "" >> complexity-report.md
+        
+        # Analyze JavaScript files
+        find src -name "*.js" -not -path "*/node_modules/*" -not -path "*/__tests__/*" | while read file; do
+          echo "### $file" >> complexity-report.md
+          cr "$file" --format json | jq -r '.reports[0] | "- Cyclomatic complexity: \(.aggregate.cyclomatic.mean | round)"' >> complexity-report.md || echo "- Could not analyze" >> complexity-report.md
+          echo "" >> complexity-report.md
+        done
+    
+    - name: Upload complexity report
+      uses: actions/upload-artifact@v3
+      with:
+        name: complexity-report
+        path: complexity-report.md
+
+  bundle-size:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Analyze bundle size
+      run: |
+        echo "## Bundle Size Analysis" > bundle-report.md
+        echo "" >> bundle-report.md
+        
+        # Get build folder size
+        BUILD_SIZE=$(du -sh build/ | cut -f1)
+        echo "- Total build size: $BUILD_SIZE" >> bundle-report.md
+        
+        # Analyze individual files
+        echo "" >> bundle-report.md
+        echo "### Individual Files" >> bundle-report.md
+        find build/static -name "*.js" -o -name "*.css" | while read file; do
+          SIZE=$(du -h "$file" | cut -f1)
+          FILENAME=$(basename "$file")
+          echo "- $FILENAME: $SIZE" >> bundle-report.md
+        done
+    
+    - name: Upload bundle report
+      uses: actions/upload-artifact@v3
+      with:
+        name: bundle-report
+        path: bundle-report.md
+    
+    - name: Bundle size check
+      run: |
+        # Check if bundle size is reasonable (adjust threshold as needed)
+        BUILD_SIZE_BYTES=$(du -sb build/ | cut -f1)
+        MAX_SIZE_BYTES=52428800  # 50MB
+        
+        if [ $BUILD_SIZE_BYTES -gt $MAX_SIZE_BYTES ]; then
+          echo "❌ Bundle size ($BUILD_SIZE_BYTES bytes) exceeds maximum allowed size ($MAX_SIZE_BYTES bytes)"
+          exit 1
+        else
+          echo "✅ Bundle size is within acceptable limits"
+        fi
+
+  accessibility:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Install accessibility testing tools
+      run: npm install -g @axe-core/cli serve
+    
+    - name: Start application server
+      run: |
+        serve -s build -l 3000 &
+        sleep 10  # Wait for server to start
+    
+    - name: Run accessibility tests
+      run: |
+        axe http://localhost:3000 --exit || true
+    
+    - name: Stop server
+      run: pkill -f "serve -s build"
+
+  performance:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Install Lighthouse CI
+      run: npm install -g @lhci/cli
+    
+    - name: Run Lighthouse CI
+      run: |
+        lhci autorun --upload.target=temporary-public-storage || true
+    
+    - name: Upload Lighthouse report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: lighthouse-report
+        path: .lighthouseci/
