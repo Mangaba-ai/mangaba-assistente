@@ -43,18 +43,18 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${props => props.theme?.primary?.orangeAccessible || '#B8470A'};
+    background: ${props => props.theme?.primary?.orangeAccessible || '#C25B11'};
     border-radius: 4px;
     transition: background 0.2s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${props => props.theme?.primary?.darkOrange || '#E6722A'};
+    background: ${props => props.theme?.primary?.darkOrange || '#C25B11'};
   }
 
   /* Focus styles */
   *:focus {
-    outline: 2px solid ${props => props.theme?.primary?.orangeAccessible || '#B8470A'};
+    outline: 2px solid ${props => props.theme?.primary?.orangeAccessible || '#C25B11'};
     outline-offset: 2px;
   }
 
@@ -62,7 +62,7 @@ const GlobalStyles = createGlobalStyle`
   input:focus,
   textarea:focus,
   select:focus {
-    outline: 2px solid ${props => props.theme?.primary?.orangeAccessible || '#B8470A'};
+    outline: 2px solid ${props => props.theme?.primary?.orangeAccessible || '#C25B11'};
     outline-offset: 2px;
   }
 
@@ -76,24 +76,24 @@ const GlobalStyles = createGlobalStyle`
 
   /* Link styles */
   a {
-    color: ${props => props.theme?.primary?.orangeAccessible || '#B8470A'};
+    color: ${props => props.theme?.primary?.orangeAccessible || '#C25B11'};
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   a:hover {
-    color: ${props => props.theme?.primary?.darkOrange || '#E6722A'};
+    color: ${props => props.theme?.primary?.darkOrange || '#C25B11'};
     text-decoration: underline;
   }
 
   /* Selection styles */
   ::selection {
-    background: ${props => props.theme?.primary?.lightYellow || '#FFF2CC'};
+    background: ${props => props.theme?.primary?.lightYellow || '#FAE4BE'};
     color: ${props => props.theme?.text?.primary || '#2D3748'};
   }
 
   ::-moz-selection {
-    background: ${props => props.theme?.primary?.lightYellow || '#FFF2CC'};
+    background: ${props => props.theme?.primary?.lightYellow || '#FAE4BE'};
     color: ${props => props.theme?.text?.primary || '#2D3748'};
   }
 

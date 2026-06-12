@@ -64,10 +64,10 @@ const SunIcon = styled.span`
   opacity: ${props => props.$isDark ? 0.7 : 1};
   transition: all 0.3s ease;
   color: ${props => props.theme.primary.yellow};
-  filter: ${props => props.$isDark ? 'none' : 'drop-shadow(0 0 8px #FFD23F80)'};
+  filter: ${props => props.$isDark ? 'none' : 'drop-shadow(0 0 8px #FF9C2480)'};
   
   &:hover {
-    filter: drop-shadow(0 0 12px #FFD23F);
+    filter: drop-shadow(0 0 12px #FF9C24);
   }
 `;
 

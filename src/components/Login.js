@@ -52,11 +52,11 @@ const float = keyframes`
 const pulse = keyframes`
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
+    box-shadow: 0 0 20px rgba(249, 117, 24, 0.3);
   }
   50% {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(255, 140, 66, 0.5);
+    box-shadow: 0 0 30px rgba(249, 117, 24, 0.5);
   }
 `;
 
@@ -242,7 +242,7 @@ const Logo = styled.div`
     width: 90%;
     height: 90%;
     object-fit: contain;
-    filter: drop-shadow(0 8px 16px rgba(255, 140, 66, 0.3));
+    filter: drop-shadow(0 8px 16px rgba(249, 117, 24, 0.3));
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
@@ -277,7 +277,7 @@ const Logo = styled.div`
   
   &:hover img {
     transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 12px 24px rgba(255, 140, 66, 0.5));
+    filter: drop-shadow(0 12px 24px rgba(249, 117, 24, 0.5));
   }
 `;
 

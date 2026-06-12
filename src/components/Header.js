@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeToggle from './ThemeToggle';
+import logoSvg from '../assets/logo.svg';
 
 const HeaderContainer = styled.header`
-  background: ${props => props.theme.gradients.nature};
+  background: linear-gradient(135deg, #F97518 0%, #E65F00 100%);
   padding: 16px 24px;
   box-shadow: ${props => props.theme.shadow.medium};
   display: flex;
@@ -181,6 +182,13 @@ const LogoIcon = styled.div`
   font-size: 24px;
   box-shadow: ${props => props.theme.shadow.light};
   transition: all 0.3s ease;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const Title = styled.h1`
@@ -424,7 +432,7 @@ function Header({
         </MenuButton>
         <Logo>
           <LogoIcon theme={theme}>
-            🥭
+            <img src={logoSvg} alt="Mangaba AI" />
           </LogoIcon>
           <div>
             <Title theme={theme}>

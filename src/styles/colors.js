@@ -2,13 +2,13 @@
 const lightTheme = {
   // Cores primárias da mangaba
   primary: {
-    orange: '#FF8C42',
-    yellow: '#FFD23F',
+    orange: '#F97518',
+    yellow: '#FF9C24',
     green: '#8FBC8F',
-    darkOrange: '#E6722A',
-    lightYellow: '#FFF2CC',
-    orangeAccessible: '#B8470A',
-    orangeDark: '#B8470A',
+    darkOrange: '#C25B11',
+    lightYellow: '#FAE4BE',
+    orangeAccessible: '#C25B11',
+    orangeDark: '#C25B11',
     greenAccessible: '#5A8A5A',
     yellowAccessible: '#B8A000',
     // Novos tons de verde
@@ -41,20 +41,20 @@ const lightTheme = {
   
   // Cores de fundo e texto
   background: {
-    primary: '#FFFFFF',
-    secondary: '#F8F9FA',
-    tertiary: '#FFF2CC',
+    primary: '#FFF8F5',
+    secondary: '#FFF4ED',
+    tertiary: '#FAE4BE',
     card: '#FFFFFF',
-    sidebar: '#FFFFFF',
-    hover: '#F0F0F0'
+    sidebar: '#FFF4ED',
+    hover: '#FFDAC2'
   },
-  
+
   text: {
-    primary: '#333333',
-    secondary: '#4B5563',
+    primary: '#1E0D01',
+    secondary: '#402B22',
     tertiary: '#6B7280',
-    muted: '#374151',
-    inverse: '#FFFFFF'
+    muted: '#402B22',
+    inverse: '#FFF8F5'
   },
   
   // Cores de estado
@@ -72,10 +72,10 @@ const lightTheme = {
   
   // Gradientes
   gradients: {
-    primary: 'linear-gradient(135deg, #FF8C42 0%, #FFD23F 100%)',
-    secondary: 'linear-gradient(135deg, #FFD23F 0%, #8FBC8F 100%)',
-    chat: 'linear-gradient(180deg, #FFF2CC 0%, #FFFFFF 100%)',
-    sidebar: 'linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%)',
+    primary: 'linear-gradient(135deg, #F97518 0%, #FF9C24 100%)',
+    secondary: 'linear-gradient(135deg, #FF9C24 0%, #8FBC8F 100%)',
+    chat: 'linear-gradient(180deg, #FFF4ED 0%, #FFF8F5 100%)',
+    sidebar: 'linear-gradient(180deg, #FFF8F5 0%, #FFF4ED 100%)',
     // Gradientes Verde - Para sucesso, confirmação e ações positivas
     greenDark: 'linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)',
     nature: 'linear-gradient(135deg, #00695C 0%, #2E7D32 50%, #1B5E20 100%)',
@@ -88,7 +88,7 @@ const lightTheme = {
     destructive: 'linear-gradient(135deg, #F44336 0%, #D32F2F 100%)',
     // Gradientes Amarelo - Para notificações, avisos e alertas
     warning: 'linear-gradient(135deg, #FF9800 0%, #F57C00 100%)',
-    notification: 'linear-gradient(135deg, #FFD23F 0%, #FFC107 100%)',
+    notification: 'linear-gradient(135deg, #FF9C24 0%, #FFC107 100%)',
     alert: 'linear-gradient(135deg, #FFC107 0%, #FF8F00 100%)',
     caution: 'linear-gradient(135deg, #FFB74D 0%, #FF9800 100%)'
   },
@@ -104,10 +104,10 @@ const lightTheme = {
     light: '0 2px 4px rgba(0, 0, 0, 0.1)',
     medium: '0 4px 8px rgba(0, 0, 0, 0.15)',
     dark: '0 8px 16px rgba(0, 0, 0, 0.2)',
-    orange: '0 4px 15px rgba(255, 140, 66, 0.3)',
-    orangeLight: '0 4px 15px rgba(255, 140, 66, 0.2)',
-    orangeFocus: '0 0 0 3px rgba(255, 140, 66, 0.1)',
-    orangeHover: '0 2px 8px rgba(255, 140, 66, 0.3)',
+    orange: '0 4px 15px rgba(249, 117, 24, 0.3)',
+    orangeLight: '0 4px 15px rgba(249, 117, 24, 0.2)',
+    orangeFocus: '0 0 0 3px rgba(249, 117, 24, 0.1)',
+    orangeHover: '0 2px 8px rgba(249, 117, 24, 0.3)',
     success: '0 4px 15px rgba(76, 175, 80, 0.3)',
     overlay: 'rgba(0, 0, 0, 0.5)',
     whiteOverlay: 'rgba(255, 255, 255, 0.1)',
@@ -118,12 +118,12 @@ const lightTheme = {
 const darkTheme = {
   // Cores primárias da mangaba (mantidas para consistência)
   primary: {
-    orange: '#FF8C42',
-    yellow: '#FFD23F',
+    orange: '#F97518',
+    yellow: '#FF9C24',
     green: '#8FBC8F',
-    darkOrange: '#E6722A',
+    darkOrange: '#C25B11',
     lightYellow: '#2A2A1A',
-    orangeAccessible: '#FF9A5C',
+    orangeAccessible: '#FF9C24',
     orangeDark: '#FFB380',
     greenAccessible: '#A8CCA8',
     yellowAccessible: '#FFE066',
@@ -188,8 +188,8 @@ const darkTheme = {
   
   // Gradientes
   gradients: {
-    primary: 'linear-gradient(135deg, #FF8C42 0%, #FFD23F 100%)',
-    secondary: 'linear-gradient(135deg, #FFD23F 0%, #8FBC8F 100%)',
+    primary: 'linear-gradient(135deg, #F97518 0%, #FF9C24 100%)',
+    secondary: 'linear-gradient(135deg, #FF9C24 0%, #8FBC8F 100%)',
     chat: 'linear-gradient(180deg, #2A2A2A 0%, #1A1A1A 100%)',
     sidebar: 'linear-gradient(180deg, #1F1F1F 0%, #1A1A1A 100%)',
     // Gradientes Verde - Para sucesso, confirmação e ações positivas (tema escuro)
@@ -220,10 +220,10 @@ const darkTheme = {
     light: '0 2px 4px rgba(0, 0, 0, 0.3)',
     medium: '0 4px 8px rgba(0, 0, 0, 0.4)',
     dark: '0 8px 16px rgba(0, 0, 0, 0.5)',
-    orange: '0 4px 15px rgba(255, 140, 66, 0.4)',
-    orangeLight: '0 4px 15px rgba(255, 140, 66, 0.3)',
-    orangeFocus: '0 0 0 3px rgba(255, 140, 66, 0.2)',
-    orangeHover: '0 2px 8px rgba(255, 140, 66, 0.4)',
+    orange: '0 4px 15px rgba(249, 117, 24, 0.4)',
+    orangeLight: '0 4px 15px rgba(249, 117, 24, 0.3)',
+    orangeFocus: '0 0 0 3px rgba(249, 117, 24, 0.2)',
+    orangeHover: '0 2px 8px rgba(249, 117, 24, 0.4)',
     success: '0 4px 15px rgba(76, 175, 80, 0.4)',
     overlay: 'rgba(0, 0, 0, 0.7)',
     whiteOverlay: 'rgba(255, 255, 255, 0.05)',

@@ -1,3 +1,10 @@
+<div align="center">
+  <img src="assets/mangaba-logo.svg" alt="Mangaba AI" width="140"/>
+
+  [![Mangaba AI](https://img.shields.io/badge/Mangaba-AI-F97518?style=for-the-badge)](https://www.mangaba.ia.br)
+  [![Site](https://img.shields.io/badge/mangaba.ia.br-1E0D01?style=for-the-badge)](https://www.mangaba.ia.br)
+</div>
+
 # 🥭 Mangaba Assistente
 
 Um assistente de IA moderno e inteligente com design inspirado na fruta mangaba, desenvolvido em React. Uma plataforma de conversação avançada que combina múltiplos agentes de IA para oferecer uma experiência única e personalizada.
